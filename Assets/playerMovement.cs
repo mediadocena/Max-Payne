@@ -13,10 +13,19 @@ public class playerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
+    bool sprint = false;
     public float jumpHeight = 3.5f;
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Shift"))
+        {
+            sprint = true;
+        }
+        else
+        {
+            sprint = false;
+        }
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && Velocity.y < 0) {
@@ -27,9 +36,15 @@ public class playerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
- 
+      
+        if (sprint == true)
+        {
+            print("Sprint");
+            controller.Move(move * (speed * 3.5f) * Time.deltaTime);
+        }
+        else { 
+            controller.Move(move * speed * Time.deltaTime);
+        }
         if (Input.GetButtonDown("Jump") && isGrounded) {
             Debug.Log("entra");
             Velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);

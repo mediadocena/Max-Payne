@@ -8,7 +8,7 @@ public class cameraController : MonoBehaviour
     public Transform playerBody;
     float xRotation = 0f;
     public bulletTime btime;
-
+    bool slow;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -25,14 +25,26 @@ public class cameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
+        BulletTimeControl();    
+    }
+    void BulletTimeControl() {
 
         if (Input.GetButtonDown("Slowmo"))
+        {
+            slow = true;
+        }
+        if (Input.GetButtonDown("NoSlowmo"))
+        {
+            slow = false;
+        }
+        if (slow == true)
+        {
             btime.DoSlowmotion();
+        }
+        else
+        {
+            btime.StopSlowmotion();
+        }
     }
 
-    void Shoot()
-    {
-
-
-    }
 }
