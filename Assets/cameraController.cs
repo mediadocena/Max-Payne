@@ -16,6 +16,8 @@ public class cameraController : MonoBehaviour
 
     void Update()
     {
+        //Movimiento del raton:
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

@@ -18,7 +18,7 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Shift"))
+        if (Input.GetKey("left shift"))
         {
             sprint = true;
         }
@@ -40,13 +40,16 @@ public class playerMovement : MonoBehaviour
         if (sprint == true)
         {
             print("Sprint");
-            controller.Move(move * (speed * 3.5f) * Time.deltaTime);
+            controller.Move(move * (speed * 1.5f) * Time.deltaTime);
         }
         else { 
             controller.Move(move * speed * Time.deltaTime);
         }
         if (Input.GetButtonDown("Jump") && isGrounded) {
             Debug.Log("entra");
+            if (Velocity.x>0) {
+                print("MAYOOOOOOOOOOR");
+            }
             Velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
         Velocity.y += gravity * Time.deltaTime;
