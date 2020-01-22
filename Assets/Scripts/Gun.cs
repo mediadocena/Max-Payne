@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
     public GameObject EnemyCamera;
     public GameObject thirdCamera;
     public GameObject firstCamera;
+    public GameObject BulletTime;
     RaycastHit hit;
     int contador;
     int segundos = 100;
@@ -27,7 +28,7 @@ public class Gun : MonoBehaviour
     {
         
         if (Input.GetButtonDown("Fire1")) {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask)) {
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask) && BulletTime.GetComponent<bulletTime>().isSlowed) {
                 Debug.Log("Entra");
                 cinematica = true;
                 EnemyCamera.SetActive(true);

@@ -907,6 +907,8 @@ MonoBehaviour:
   EnemyCamera: {fileID: 1317922146}
   thirdCamera: {fileID: 1091216889}
   firstCamera: {fileID: 133610730}
+  BulletTime: {fileID: 1181452717}
+  cinematica: 0
 --- !u!1 &1091216889
 GameObject:
   m_ObjectHideFlags: 0
