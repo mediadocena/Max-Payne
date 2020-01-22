@@ -14,7 +14,14 @@ public class Gun : MonoBehaviour
     RaycastHit hit;
     int contador;
     int segundos = 100;
-    bool cinematica = false;
+   public bool cinematica = false;
+
+    void Start()
+    {
+        EnemyCamera.SetActive(false);
+        thirdCamera.SetActive(true);
+        firstCamera.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
