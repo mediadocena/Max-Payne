@@ -63,12 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\bulletTime.cs" />
-    <Compile Include="Assets\CameraChange.cs" />
-    <Compile Include="Assets\cameraController.cs" />
-    <Compile Include="Assets\GrapplingGun.cs" />
-    <Compile Include="Assets\Gun.cs" />
-    <Compile Include="Assets\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\bulletTime.cs" />
+    <Compile Include="Assets\Scripts\CameraChange.cs" />
+    <Compile Include="Assets\Scripts\cameraController.cs" />
+    <Compile Include="Assets\Scripts\GrapplingGun.cs" />
+    <Compile Include="Assets\Scripts\Gun.cs" />
+    <Compile Include="Assets\Scripts\Movement\MoveCamera.cs" />
+    <Compile Include="Assets\Scripts\Movement\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\TurretControllerAi.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\AutoBlink.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\CameraController.cs" />
     <Compile Include="Assets\unity-chan!\Unity-chan! Model\Scripts\FaceUpdate.cs" />
