@@ -14,7 +14,7 @@ public class Gun : MonoBehaviour
     public GameObject BulletTime;
     RaycastHit hit;
     int contador;
-    int segundos = 100;
+    int segundos = 200;
    public bool cinematica = false;
 
     void Start()
@@ -26,9 +26,11 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Disparamos
         if (Input.GetButtonDown("Fire1")) {
+            //Predice si la el disparo va a impactar en el enemigo con el bullet time
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask) && BulletTime.GetComponent<bulletTime>().isSlowed) {
+                //Si impacta, se activa la cámara cinemática
                 Debug.Log("Entra");
                 cinematica = true;
                 EnemyCamera.SetActive(true);
@@ -41,12 +43,15 @@ public class Gun : MonoBehaviour
 
             Instanciaproyectil.velocity = transform.TransformDirection(new Vector3(0, 0, speed*2));
             //Colisiones off
-            Physics.IgnoreCollision(Instanciaproyectil.GetComponent<Collider>(), transform.root.GetComponent<Collider>());
+            //Physics.IgnoreCollision(Instanciaproyectil.GetComponent<Collider>(), transform.root.GetComponent<Collider>());
         }
+        //Si esta la cinematica activa entra
         if (cinematica == true)
         {
             Debug.Log("Cinematica " + contador);
+            //contador para determinar el tiempo de duración de la cámara
             contador++;
+            //Cuando llegue al límite de tiempo se cambian las camaras a la normalidad
             if (contador > segundos)
             {
                 EnemyCamera.SetActive(false);

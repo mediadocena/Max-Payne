@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - AICars
+  - PLAYER_TAG
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
