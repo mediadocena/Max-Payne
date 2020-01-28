@@ -61,5 +61,6 @@ public class Gun : MonoBehaviour
                 cinematica = false;
             }
         }
+
     }
 }

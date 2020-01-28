@@ -63,9 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\About\Scripts\Editor\ReadmeEditor.cs" />
-    <Compile Include="Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\Scripts\Editor\PackageChecker\PackageChecker.cs" />
-    <None Include="Assets\AssetStoreOriginals\_SNAPS_PrototypingAssets\Scripts\Editor\PackageChecker\PackageImportList.txt" />
+    <Compile Include="Assets\unity-chan!\Unity-chan! Model\Editor\CreateLocatorHere.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
@@ -74,6 +72,9 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProGrids">
+      <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
@@ -86,6 +87,9 @@
     </Reference>
     <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
       <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProGrids.Editor">
+      <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -110,12 +114,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProGrids">
-      <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProGrids.Editor">
-      <HintPath>F:/Unity/Unity Projects/Max Payne Hacendado/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>F:/Unity/2019.2.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

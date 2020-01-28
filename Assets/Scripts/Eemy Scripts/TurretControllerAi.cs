@@ -15,12 +15,11 @@ public class TurretControllerAi : MonoBehaviour
 
     private EnemyAnimator enemy_Anim;
     private NavMeshAgent navAgent;
-
     private EnemyState enemy_State;
-
     public float walk_Speed = 0.5f;
     public float run_Speed = 4f;
-
+    public GameObject Gun;
+    public GameObject Hit;
     public float chase_Distance = 7f;
     private float current_Chase_Distance;
     public float attack_Distance = 1.8f;
@@ -38,6 +37,8 @@ public class TurretControllerAi : MonoBehaviour
     public GameObject attack_Point;
 
     private EnemyAudio enemy_Audio;
+
+    private bool dead=false;
 
     void Awake()
     {
@@ -72,22 +73,30 @@ public class TurretControllerAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (enemy_State == EnemyState.PATROL)
+        Debug.Log(dead);
+        if (dead == false)
         {
-            Patrol();
+            if (enemy_State == EnemyState.PATROL)
+            {
+                Patrol();
+            }
+
+            if (enemy_State == EnemyState.CHASE)
+            {
+                Chase();
+            }
+
+            if (enemy_State == EnemyState.ATTACK)
+            {
+                Attack();
+            }
+        }
+        else {
+            gameObject.GetComponent<NavMeshAgent>().enabled = false ;
+            gameObject.GetComponent<Animator>().enabled = false;
+            gameObject.GetComponent<TurretControllerAi>().enabled=false;
         }
 
-        if (enemy_State == EnemyState.CHASE)
-        {
-            Chase();
-        }
-
-        if (enemy_State == EnemyState.ATTACK)
-        {
-            Attack();
-        }
-       
     }
  
 
@@ -105,21 +114,21 @@ public class TurretControllerAi : MonoBehaviour
         {
 
             SetNewRandomDestination();
-
             patrol_Timer = 0f;
 
         }
 
         if (navAgent.velocity.sqrMagnitude > 0)
         {
+            Debug.Log("Camina");
 
-          //  enemy_Anim.Walk(true);
+           // enemy_Anim.Walk(true);
 
         }
         else
         {
 
-            //enemy_Anim.Walk(false);
+          // enemy_Anim.Walk(false);
 
         }
 
@@ -210,16 +219,19 @@ public class TurretControllerAi : MonoBehaviour
         navAgent.isStopped = true;
 
         attack_Timer += Time.deltaTime;
-
+        gameObject.transform.LookAt(target.position);
         if (attack_Timer > wait_Before_Attack)
         {
-
-           // enemy_Anim.Attack();
+            
+            enemy_Anim.Attack();
 
             attack_Timer = 0f;
 
             // play attack sound
-            enemy_Audio.Play_AttackSound();
+           // enemy_Audio.Play_AttackSound();
+
+            //Shoot
+            Gun.SendMessage("shoot");
 
         }
 
@@ -269,10 +281,12 @@ public class TurretControllerAi : MonoBehaviour
 
     public void die() {
         Debug.Log("CE MURIO");
-        Destroy(gameObject,100f);
+        dead = true;
+        Destroy(Hit);
         GetComponent<Animator>().enabled = false;
         SetRigidBodyState(false);
         SetColliderState(true);
+        
         
     }
 

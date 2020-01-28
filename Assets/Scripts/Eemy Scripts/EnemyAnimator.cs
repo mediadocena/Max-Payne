@@ -12,26 +12,26 @@ public class EnemyAnimator : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void Walk(bool walk)
+    /*public void Walk(bool walk)
     {
-        anim.SetBool(AnimationTags.WALK_PARAMETER, walk);
-    }
+        anim.SetBool("Walk",walk);
+    }*/
 
-    public void Run(bool run)
+   /* public void Run(bool run)
     {
         anim.SetBool(AnimationTags.RUN_PARAMETER, run);
-    }
+    }*/
 
     public void Attack()
     {
-        anim.SetTrigger(AnimationTags.ATTACK_TRIGGER);
+        anim.SetTrigger("Attack");
     }
 
-    public void Dead()
+   /* public void Dead()
     {
         anim.SetTrigger(AnimationTags.DEAD_TRIGGER);
-    }
-
+    }*/
+    
 } // class
 
 
