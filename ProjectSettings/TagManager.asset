@@ -9,6 +9,10 @@ TagManager:
   - PLAYER_TAG
   - Bullet
   - Enemy
+  - EnemyCamera
+  - BulletTime
+  - PlayerBullet
+  - Meta
   layers:
   - Default
   - TransparentFX

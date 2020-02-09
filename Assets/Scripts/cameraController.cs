@@ -9,15 +9,25 @@ public class cameraController : MonoBehaviour
     float xRotation = 0f;
     public bulletTime btime;
     bool slow;
+    public GameObject gunControl;
+    public GameObject PlayeraudioSource;
+    public AudioSource audio;
+    public AudioClip StartSlowmo;
+    public AudioClip EndSlowmo;
+    private bool soundSlow;
+    public float bTimeCD = 5f;
+    private float timeToBT;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        timeToBT = bTimeCD;
     }
 
     void Update()
     {
+        Debug.Log(timeToBT);
+        if (gunControl.GetComponent<Gun>().cinematica==false) { 
         //Movimiento del raton:
-
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -27,7 +37,8 @@ public class cameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
-        BulletTimeControl();    
+        BulletTimeControl();
+        }
     }
     void BulletTimeControl() {
 
@@ -39,12 +50,26 @@ public class cameraController : MonoBehaviour
         {
             slow = false;
         }
-        if (slow == true)
+        if (slow == true && timeToBT>0f)
         {
+            timeToBT = timeToBT -10 * Time.deltaTime;
+            if (!soundSlow) {
+                audio.PlayOneShot(StartSlowmo, 0.05f);
+                soundSlow = true;
+            }
             btime.DoSlowmotion();
         }
         else
         {
+            if (timeToBT<bTimeCD) {
+                slow = false;
+                timeToBT = timeToBT + 1 * Time.deltaTime;
+            }
+
+            if (soundSlow) { 
+            audio.PlayOneShot(EndSlowmo, 0.05f);
+                soundSlow = false;
+            }
             btime.StopSlowmotion();
         }
     }

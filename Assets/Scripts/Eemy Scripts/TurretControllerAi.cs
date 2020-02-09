@@ -20,9 +20,10 @@ public class TurretControllerAi : MonoBehaviour
     public float run_Speed = 4f;
     public GameObject Gun;
     public GameObject Hit;
-    public float chase_Distance = 7f;
+    private Puntuacion Score;
+    public float chase_Distance = 30f;
     private float current_Chase_Distance;
-    public float attack_Distance = 1.8f;
+    public float attack_Distance = 25f;
     public float chase_After_Attack_Distance = 2f;
 
     public float patrol_Radius_Min = 20f, patrol_Radius_Max = 60f;
@@ -37,7 +38,7 @@ public class TurretControllerAi : MonoBehaviour
     public GameObject attack_Point;
 
     private EnemyAudio enemy_Audio;
-
+    public bool esTorreta;
     private bool dead=false;
 
     void Awake()
@@ -46,8 +47,8 @@ public class TurretControllerAi : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
 
         target = GameObject.FindWithTag("PLAYER_TAG").transform;
-
-        enemy_Audio = GetComponentInChildren<EnemyAudio>();
+        Score = GameObject.FindGameObjectWithTag("PLAYER_TAG").GetComponent<Puntuacion>();
+        enemy_Audio = GetComponent<EnemyAudio>();
 
     }
 
@@ -110,7 +111,7 @@ public class TurretControllerAi : MonoBehaviour
         // add to the patrol timer
         patrol_Timer += Time.deltaTime;
 
-        if (patrol_Timer > patrol_For_This_Time)
+        if (patrol_Timer > patrol_For_This_Time && !esTorreta)
         {
 
             SetNewRandomDestination();
@@ -121,14 +122,14 @@ public class TurretControllerAi : MonoBehaviour
         if (navAgent.velocity.sqrMagnitude > 0)
         {
             Debug.Log("Camina");
-
-           // enemy_Anim.Walk(true);
+            Debug.Log(chase_Distance);
+            enemy_Anim.Walk(true);
 
         }
         else
         {
 
-          // enemy_Anim.Walk(false);
+          enemy_Anim.Walk(false);
 
         }
 
@@ -136,12 +137,12 @@ public class TurretControllerAi : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) <= chase_Distance)
         {
 
-           // enemy_Anim.Walk(false);
-
+           enemy_Anim.Walk(false);
+            Debug.Log("CHASE");
             enemy_State = EnemyState.CHASE;
 
             // play spotted audio
-            enemy_Audio.Play_ScreamSound();
+           // enemy_Audio.Play_ScreamSound();
 
         }
 
@@ -184,7 +185,7 @@ public class TurretControllerAi : MonoBehaviour
             // reset the chase distance to previous
             if (chase_Distance != current_Chase_Distance)
             {
-                chase_Distance = current_Chase_Distance;
+               current_Chase_Distance=chase_Distance;
             }
 
         }
@@ -219,16 +220,17 @@ public class TurretControllerAi : MonoBehaviour
         navAgent.isStopped = true;
 
         attack_Timer += Time.deltaTime;
-        gameObject.transform.LookAt(target.position);
+        
         if (attack_Timer > wait_Before_Attack)
         {
-            
+            Vector3 a = new Vector3(target.position.x, target.position.y - 4.56f, target.position.z);
+            gameObject.transform.LookAt(a);
             enemy_Anim.Attack();
 
             attack_Timer = 0f;
 
             // play attack sound
-           // enemy_Audio.Play_AttackSound();
+            enemy_Audio.Play_AttackSound();
 
             //Shoot
             Gun.SendMessage("shoot");
@@ -282,6 +284,7 @@ public class TurretControllerAi : MonoBehaviour
     public void die() {
         Debug.Log("CE MURIO");
         dead = true;
+        Score.SendMessage("addScore");
         Destroy(Hit);
         GetComponent<Animator>().enabled = false;
         SetRigidBodyState(false);

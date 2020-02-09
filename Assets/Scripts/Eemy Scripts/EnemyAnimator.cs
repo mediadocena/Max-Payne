@@ -12,10 +12,10 @@ public class EnemyAnimator : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    /*public void Walk(bool walk)
+    public void Walk(bool walk)
     {
         anim.SetBool("Walk",walk);
-    }*/
+    }
 
    /* public void Run(bool run)
     {
